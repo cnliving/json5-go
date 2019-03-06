@@ -6,9 +6,8 @@ json5 implemented by golang
 # INSTALL
 
 ```
-$ git clone  <http path prefex>/json5-go    ${GOPATH}/src/encoding/json5
-or
-$ go get -v -u  <http path prefex>/json5-go -d ${GOPATH}/src/encoding/json5
+$ brew tap yosuke-furukawa/json5
+$ brew install json5
 ```
 
 # HOW TO USE
@@ -31,32 +30,18 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"encoding/json5"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 	"os"
 )
 
 func main() {
-    //-------one---------
-    var data interface{}
-    by1 :=byte("{"what":"hello" //note }")
-	CheckError(true,err)
-	err=json5.Unmarshal(by1,&data)
-	if err != nil {
-		fmt.Println(err)
-	}
-    b, err := json.MarshalIndent(data, "", "    ")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(b))
-    //-------two---------
-	
+	var data interface{}
 	dec := json5.NewDecoder(os.Stdin)
 	err := dec.Decode(&data)
 	if err != nil {
 		fmt.Println(err)
 	}
-	b, err = json.MarshalIndent(data, "", "    ")
+	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
 	}
